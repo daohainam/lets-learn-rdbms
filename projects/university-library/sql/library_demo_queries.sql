@@ -1,8 +1,3 @@
-DECLARE @Today DATE = GETDATE();
-DECLARE @Start DATE = DATEADD(DAY, -60, @Today);
-DECLARE @End   DATE = @Today;
-GO
-
 /* 1) Danh sách sách + số bản sao + số bản sao đang sẵn sàng */
 SELECT 
     tl.MaTL,
@@ -61,7 +56,7 @@ SELECT
 FROM MUONTRA m
 JOIN SINHVIEN sv ON sv.MaDocGia = m.MaDocGia
 JOIN DOCGIA dg ON dg.MaDocGia = sv.MaDocGia
-WHERE m.NgayMuon BETWEEN @Start AND @End
+WHERE m.NgayMuon BETWEEN DATEADD(day, -30, GETDATE()) AND GETDATE()
 GROUP BY sv.MSSV, dg.HoTen
 ORDER BY SoLanMuon DESC;
 GO
