@@ -1,0 +1,1 @@
+-- Placeholder: full schema DDL should be regenerated here
