@@ -50,3 +50,93 @@ Hệ thống cho phép tra cứu:
 Độc giả đang mượn những bản sao nào.
 
 Tình trạng của từng bản sao.
+
+## ER diagram
+```mermaid
+erDiagram
+    DOCGIA ||--o{ MUONTRA : muon
+    BANSAO ||--o{ MUONTRA : duoc_muon
+    TAILIEU ||--o{ BANSAO : co
+
+    DOCGIA ||--|| SINHVIEN : "ISA"
+    DOCGIA ||--|| GIANGVIEN : "ISA"
+
+    TAILIEU ||--|| SACH : "ISA"
+    TAILIEU ||--|| LUANVAN : "ISA"
+
+    TACGIA }o--o{ TACGIA_TAILIEU : tham_gia
+    TAILIEU }o--o{ TACGIA_TAILIEU : co
+
+    LUANVAN ||--o{ DOCGIA : "TacGiaLaSV (1 SV - 1 LV)" 
+    LUANVAN ||--o{ GIANGVIEN : "NguoiHuongDan (1 GV - N LV)"
+
+DOCGIA {
+        int MaDocGia PK
+        string HoTen
+        date NgaySinh
+        string DiaChi
+        string Email
+        string DienThoai
+        string LoaiDocGia 
+    }
+
+    SINHVIEN {
+        int MaDocGia PK,FK
+        string MSSV
+        string NganhHoc
+        string KhoaHoc
+    }
+
+    GIANGVIEN {
+        int MaDocGia PK,FK
+        string MaGV
+        string KhoaCongTac
+    }
+
+    TAILIEU {
+        int MaTL PK
+        string TieuDe
+        int NamXB
+        string NhaXuatBan
+        string LoaiTL
+    }
+
+    SACH {
+        int MaTL PK,FK
+        int SoTrang
+        string ISBN
+    }
+
+    LUANVAN {
+        int MaTL PK,FK
+        string CapDo
+    }
+
+    TACGIA {
+        int MaTG PK
+        string TenTacGia
+    }
+
+    TACGIA_TAILIEU {
+        int MaTG FK
+        int MaTL FK
+        string VaiTro
+    }
+
+    BANSAO {
+        int MaBanSao PK
+        int MaTL FK
+        string TinhTrang
+        string ViTriKe
+    }
+
+    MUONTRA {
+        int MaMuonTra PK
+        int MaDocGia FK
+        int MaBanSao FK
+        date NgayMuon
+        date HanTra
+        date NgayTra
+        float TienPhat
+    }
+```
