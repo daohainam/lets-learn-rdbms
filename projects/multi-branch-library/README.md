@@ -25,7 +25,7 @@ Thư viện có **nhiều chi nhánh**, mỗi chi nhánh lưu trữ nhiều **b�
 8. Bạn đọc tạo một **phiếu mượn** tại một chi nhánh (ngày mượn, hạn trả, nhân viên xử lý).
 9. Một phiếu mượn có **nhiều dòng chi tiết** (mỗi dòng là 1 bản sao sách).
 10. Khi trả, lưu **ngày trả thực tế** theo từng bản sao.
-11. Ràng buộc:
+11. Ràng buộc (có thể bỏ qua nếu chưa học trigger):
    - Mỗi bản sao tại một thời điểm **không thể** được mượn bởi 2 phiếu khác nhau.
    - Một bạn đọc có tối đa **5 bản sao đang mượn** (chưa trả).
    - Hạn trả mặc định: **14 ngày** từ ngày mượn (có thể cấu hình/ghi nhận theo phiếu).
