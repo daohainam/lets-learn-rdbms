@@ -135,3 +135,74 @@ SimpleShop bán các **sản phẩm** thuộc **danh mục**. **Khách hàng** �
   ├─ SimpleShopDB_DemoQueries.sql
   └─ README.md
 ```
+
+
+---
+
+## Phụ lục: ERD (Mermaid)
+
+```mermaid
+erDiagram
+    CUSTOMERS  ||--o{  ORDERS        : places
+    ORDERS     ||--o{  ORDER_ITEMS   : contains
+    PRODUCTS   ||--o{  ORDER_ITEMS   : includes
+    CATEGORIES ||--o{  PRODUCTS      : categorizes
+    ORDERS     ||--o{  PAYMENTS      : has
+    SHIPPERS   ||--o{  SHIPMENTS     : handled_by
+    ORDERS     ||--o|  SHIPMENTS     : ships
+
+    CUSTOMERS {
+        INT       CustomerID   PK
+        NVARCHAR  CustomerName
+        NVARCHAR  Email        "UQ"
+        NVARCHAR  Phone
+    }
+    CATEGORIES {
+        INT       CategoryID   PK
+        NVARCHAR  CategoryName "UQ"
+    }
+    PRODUCTS {
+        INT       ProductID    PK
+        NVARCHAR  ProductName
+        NVARCHAR  SKU          "UQ"
+        INT       CategoryID   FK
+        DECIMAL   UnitPrice
+        BIT       IsActive
+    }
+    ORDERS {
+        INT       OrderID      PK
+        INT       CustomerID   FK
+        DATETIME2 OrderDate
+        NVARCHAR  Status
+    }
+    ORDER_ITEMS {
+        INT       OrderID      PK, FK
+        INT       ProductID    PK, FK
+        INT       Quantity
+        DECIMAL   UnitPrice
+        DECIMAL   Discount
+        DECIMAL   LineTotal    "computed"
+    }
+    PAYMENTS {
+        INT       PaymentID    PK
+        INT       OrderID      FK
+        DECIMAL   Amount
+        NVARCHAR  Method
+        DATETIME2 PaidAt
+    }
+    SHIPPERS {
+        INT       ShipperID    PK
+        NVARCHAR  ShipperName  "UQ"
+        NVARCHAR  Phone
+    }
+    SHIPMENTS {
+        INT       ShipmentID   PK
+        INT       OrderID      FK
+        INT       ShipperID    FK
+        NVARCHAR  TrackingNo   "UQ"
+        DATETIME2 ShippedAt
+        DATETIME2 DeliveredAt
+    }
+```
+
+
