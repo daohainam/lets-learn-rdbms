@@ -17,7 +17,9 @@ BEGIN
     (N'Bakery'),
     (N'Dairy'),
     (N'Household'),
-    (N'Personal Care');
+    (N'Personal Care'),
+  	(N'Electronics'),
+	  (N'Garden');
 END
 
 -- Products (12) with explicit SKUs
